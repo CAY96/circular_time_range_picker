@@ -1,60 +1,78 @@
-## circular_time_range_picker
+# circular_time_range_picker
 
-A highly customizable circular time **range** picker for Flutter.  
-Designed for use cases like sleep tracking, focus sessions, schedules, etc., where users select a start and end time on a 24‑hour clock.
+A highly customizable circular time **range** picker for Flutter. 
+Perfect for use cases like **sleep tracking, focus sessions, or scheduling**, where users select a start and end time on a 24-hour clock face.
 
-### Features
+## Features
 
-- **Circular 24h time range selection**
-- **Gradient arc** between start and end
-- **Configurable snapping** (minute interval + snapping strategy)
-- **Drag handles + arc drag**
-  - Drag start handle
-  - Drag end handle
-  - Drag the arc itself to move the whole range
-- **Custom handler widgets**
-- Simple `TimeRangeValue` model with a computed `duration`
+* **24h Circular Selection:** Intuitive 360-degree time range picking.
+* **Flexible Interaction:** * Drag the **start handle** to adjust the beginning.
+    * Drag the **end handle** to adjust the end.
+    * Drag the **entire arc** to shift the whole time range at once.
+* **Smart Snapping:** Fully configurable `minuteInterval` (e.g., 5, 10, 15, 30 min) with multiple snapping strategies (`round`, `floor`, `ceil`).
+* **Highly Customizable UI:**
+    * Support for **Gradients** on the range arc.
+    * Use **Custom Widgets** (Icons, Images) as handles.
+    * Adjustable stroke width, track colors, and handle sizes.
+* **Midnight Logic:** Automatically calculates durations that cross the midnight threshold (e.g., 23:00 to 07:00).
 
 ---
 
+## Getting started
 
-## Basic usage
+Add the package to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  circular_time_range_picker: ^1.0.0
+```
+
+Import it in your Dart code:
 
 ```dart
-import 'package:flutter/material.dart';
 import 'package:circular_time_range_picker/circular_time_range_picker.dart';
+```
 
-class SleepTrackerExample extends StatefulWidget {
-  const SleepTrackerExample({super.key});
+---
+## Usage
 
-  @override
-  State<SleepTrackerExample> createState() => _SleepTrackerExampleState();
-}
+**Simple Example**
+The most basic implementation requires an `initialValue` and an `onChanged` callback.
+```dart
+CircularTimeRangePicker(
+  initialValue: const TimeRangeValue(
+    start: TimeOfDay(hour: 22, minute: 0),
+    end: TimeOfDay(hour: 6, minute: 0),
+  ),
+  onChanged: (newRange) {
+    print("New Duration: ${newRange.duration.inHours} hours");
+  },
+)
+```
 
-class _SleepTrackerExampleState extends State<SleepTrackerExample> {
-  TimeRangeValue _sleepTime = const TimeRangeValue(
-    start: TimeOfDay(hour: 23, minute: 0),
-    end: TimeOfDay(hour: 7, minute: 0),
-  );
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: CircularTimeRangePicker(
-        initialValue: _sleepTime,
-        size: const Size(280, 280),
-        onChanged: (range) {
-          setState(() => _sleepTime = range);
-        },
-      ),
-    );
-  }
-}
+**Advanced Styling & Snapping**
+You can use `TimePickerStyle` and `SnapStrategy` to match your app's design and UX requirements.
+```dart
+CircularTimeRangePicker(
+  initialValue: _myRange,
+  size: const Size(280, 280),
+  minuteInterval: 15, 
+  snapStrategy: SnapStrategy.round,
+  style: TimePickerStyle(
+    trackColor: Colors.white10,
+    rangeGradient: [Colors.indigoAccent, Colors.deepOrangeAccent],
+    strokeWidth: 40,
+    handlerRadius: 22,
+    startHandlerWidget: const Icon(Icons.bed, color: Colors.indigo, size: 24),
+    endHandlerWidget: const Icon(Icons.sunny, color: Colors.orange, size: 24),
+  ),
+  onChanged: (range) => setState(() => _myRange = range),
+)
 ```
 
 ---
 
-## API overview
+## API Reference
 
 ### `CircularTimeRangePicker`
 
@@ -65,8 +83,6 @@ CircularTimeRangePicker({
   required TimeRangeValue initialValue,
   TimePickerStyle style = const TimePickerStyle(),
   required void Function(TimeRangeValue) onChanged,
-
-  // Snapping
   int minuteInterval = 10,
   SnapStrategy snapStrategy = SnapStrategy.round,
 })
@@ -197,54 +213,24 @@ Stack(
 
 ---
 
-## Roadmap / ideas
+## FAQ
 
-- Expose more styling hooks (labels, ticks, etc.)
-- Support theming helpers
-- Additional presets for common use‑cases (sleep, focus timer, etc.)
+**Q: How do I display the total duration in the center?**
+A: Wrap the `CircularTimeRangePicker` in a `Stack` and place a `Text` widget in the center. Since the picker's center is transparent, the text will be visible.
+
+**Q: Does it support 12-hour or 24-hour formats?**
+A: The picker always operates on a 24-hour logic (full circle), but you can format the output `TimeOfDay` to 12h or 24h format in your UI using `timeOfDay.format(context)`.
+
+---
+
+## Roadmap
+
+- [ ] Tick marks and hour labels on the track.
+- [ ] Vibrate feedback on snap.
+- [ ] Support for non-linear time scales.
 
 ---
 
 ## License
 
 This package is distributed under the MIT License. See `LICENSE` for details.
-
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
-
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
-```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
