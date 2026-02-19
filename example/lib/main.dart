@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: const Color(0xFF121212),
-        appBar: AppBar(title: const Text('Circular Time Range Picker')),
+        // appBar: AppBar(title: const Text('Circular Time Range Picker')),
         body: const Center(child: SleepTrackerExample()),
       ),
     );
@@ -55,7 +55,7 @@ class _SleepTrackerExampleState extends State<SleepTrackerExample> {
                 strokeWidth: 40,
                 handlerRadius: 25,
                 handlerColor: Colors.white,
-                startHandlerWidget: Icon(Icons.bed, color: Colors.indigo, size: 30),
+                startHandlerWidget: Icon(Icons.mode_night_rounded, color: Colors.indigo, size: 30),
                 endHandlerWidget: Icon(Icons.sunny, color: Colors.orange, size: 30),
               ),
             ),
