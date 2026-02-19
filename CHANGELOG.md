@@ -1,3 +1,7 @@
+## 0.1.1
+
+* Fix minor typos in README.
+
 ## 0.1.0
 
 * Initial release of `circular_time_range_picker`.
