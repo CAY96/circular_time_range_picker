@@ -6,7 +6,7 @@ class TimePickerStyle {
   final double strokeWidth;
   final double handlerRadius;
   final Color handlerColor;
-  final Widget? startHandlerWidget; // 커스텀 아이콘용
+  final Widget? startHandlerWidget;
   final Widget? endHandlerWidget;
 
   const TimePickerStyle({

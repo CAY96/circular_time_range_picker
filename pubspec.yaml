@@ -1,11 +1,11 @@
 name: circular_time_range_picker
-description: "A new Flutter package project."
-version: 0.0.1
-homepage:
+description: "A customizable circular time range picker widget for Flutter applications."
+version: 0.1.0
+homepage: https://github.com/CAY96/circular_time_range_picker.git
 
 environment:
-  sdk: ^3.9.0
-  flutter: ">=1.17.0"
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.0.0"
 
 dependencies:
   flutter:

@@ -27,7 +27,7 @@ class SleepTrackerExample extends StatefulWidget {
 }
 
 class _SleepTrackerExampleState extends State<SleepTrackerExample> {
-  // 초기값 설정: 밤 11시 ~ 아침 7시
+  // Initial setup: 11:00 PM to 07:00 AM
   TimeRangeValue _sleepTime = const TimeRangeValue(
     start: TimeOfDay(hour: 23, minute: 0),
     end: TimeOfDay(hour: 7, minute: 0),
@@ -59,7 +59,7 @@ class _SleepTrackerExampleState extends State<SleepTrackerExample> {
                 endHandlerWidget: Icon(Icons.sunny, color: Colors.orange, size: 30),
               ),
             ),
-            // 중앙에 총 시간 표시
+            // Display total duration in the center
             Text(
               _formatDuration(_sleepTime),
               style: const TextStyle(
@@ -71,7 +71,7 @@ class _SleepTrackerExampleState extends State<SleepTrackerExample> {
           ],
         ),
         const SizedBox(height: 50),
-        // 선택된 시간 표시부
+        // Selected time information display
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -83,7 +83,7 @@ class _SleepTrackerExampleState extends State<SleepTrackerExample> {
     );
   }
 
-  // 시작부터 끝까지의 총 시간을 계산하고 포맷팅
+  /// Calculates and formats the total duration between start and end times.
   String _formatDuration(TimeRangeValue range) {
     final duration = range.duration;
     final hours = duration.inHours;

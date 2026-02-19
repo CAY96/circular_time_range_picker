@@ -17,20 +17,6 @@ Designed for use cases like sleep tracking, focus sessions, schedules, etc., whe
 
 ---
 
-## Installation
-
-Add to your `pubspec.yaml`:
-
-```yaml
-dependencies:
-  circular_time_range_picker:
-    git:
-      url: git@github.com:<your-username>/circular_time_range_picker.git
-```
-
-(Adjust to whatever publishing strategy you use later.)
-
----
 
 ## Basic usage
 
