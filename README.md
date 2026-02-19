@@ -10,7 +10,8 @@ Perfect for use cases like **sleep tracking, focus sessions, or scheduling**, wh
 ## Features
 
 * **24h Circular Selection:** Intuitive 360-degree time range picking.
-* **Flexible Interaction:** * Drag the **start handle** to adjust the beginning.
+* **Flexible Interaction:** 
+    * Drag the **start handle** to adjust the beginning.
     * Drag the **end handle** to adjust the end.
     * Drag the **entire arc** to shift the whole time range at once.
 * **Smart Snapping:** Fully configurable `minuteInterval` (e.g., 5, 10, 15, 30 min) with multiple snapping strategies (`round`, `floor`, `ceil`).
@@ -182,13 +183,6 @@ A: Wrap the `CircularTimeRangePicker` in a `Stack` and place a `Text` widget in 
 **Q: Does it support 12-hour or 24-hour formats?**
 
 A: The picker always operates on a 24-hour logic (full circle), but you can format the output `TimeOfDay` to 12h or 24h format in your UI using `timeOfDay.format(context)`.
-
-
-## Roadmap
-
-- [ ] Tick marks and hour labels on the track.
-- [ ] Vibrate feedback on snap.
-- [ ] Support for non-linear time scales.
 
 
 ## License
