@@ -6,6 +6,7 @@ Perfect for use cases like **sleep tracking, focus sessions, or scheduling**, wh
   <img src="https://raw.githubusercontent.com/CAY96/circular_time_range_picker/main/assets/demo_1.gif" width="30%" alt="Basic Demo" />
 </p>
 
+
 ## Features
 
 * **24h Circular Selection:** Intuitive 360-degree time range picking.
@@ -19,7 +20,6 @@ Perfect for use cases like **sleep tracking, focus sessions, or scheduling**, wh
     * Adjustable stroke width, track colors, and handle sizes.
 * **Midnight Logic:** Automatically calculates durations that cross the midnight threshold (e.g., 23:00 to 07:00).
 
----
 
 ## Getting started
 
@@ -36,10 +36,10 @@ Import it in your Dart code:
 import 'package:circular_time_range_picker/circular_time_range_picker.dart';
 ```
 
----
+
 ## Usage
 
-**Simple Example**
+### Simple Example
 The most basic implementation requires an `initialValue` and an `onChanged` callback.
 ```dart
 CircularTimeRangePicker(
@@ -53,7 +53,7 @@ CircularTimeRangePicker(
 )
 ```
 
-**Advanced Styling & Snapping**
+### Advanced Styling & Snapping
 You can use `TimePickerStyle` and `SnapStrategy` to match your app's design and UX requirements.
 ```dart
 CircularTimeRangePicker(
@@ -73,7 +73,6 @@ CircularTimeRangePicker(
 )
 ```
 
----
 
 ## API Reference
 
@@ -108,7 +107,6 @@ Internally, both:
 
 are snapped according to these settings, so the UI and values stay perfectly in sync.
 
----
 
 ### `TimeRangeValue`
 
@@ -128,9 +126,8 @@ class TimeRangeValue {
   - Computed as the forward difference from `start` to `end`.
   - Handles ranges that cross midnight (e.g. `23:00 → 07:00` = 8 hours).
 
----
 
-### Styling with `TimePickerStyle`
+### `TimePickerStyle`
 
 ```dart
 class TimePickerStyle {
@@ -143,8 +140,8 @@ class TimePickerStyle {
   final Widget? endHandlerWidget;
 
   const TimePickerStyle({
-    this.trackColor = const Color(0xFFEEEEEE),
-    this.rangeGradient = const [Colors.blue, Colors.lightBlueAccent],
+    this.trackColor = Colors.white10,
+    this.rangeGradient = const [Colors.indigoAccent, Colors.deepOrangeAccent],
     this.strokeWidth = 30.0,
     this.handlerRadius = 18.0,
     this.handlerColor = Colors.white,
@@ -166,65 +163,26 @@ Example:
 
 ```dart
 style: TimePickerStyle(
-  trackColor: Colors.white10,
-  rangeGradient: const [Colors.indigoAccent, Colors.orange],
+  trackColor: const Color(0xFFEEEEEE),
+  rangeGradient: const [Colors.blue, Colors.lightBlueAccent],
   strokeWidth: 40,
   handlerRadius: 20,
   handlerColor: Colors.white,
-  startHandlerWidget: const Icon(Icons.nights_stay, color: Colors.white),
-  endHandlerWidget: const Icon(Icons.wb_sunny, color: Colors.white),
+  startHandlerWidget: const Icon(Icons.bed, color: Colors.white),
+  endHandlerWidget: const Icon(Icons.sunny, color: Colors.white),
 ),
 ```
-
----
-
-## Example: showing total duration in the center
-
-The example app shows how to put the picker in a `Stack` and render the total duration inside the circle:
-
-```dart
-Stack(
-  alignment: Alignment.center,
-  children: [
-    CircularTimeRangePicker(
-      initialValue: _sleepTime,
-      size: const Size(280, 280),
-      onChanged: (newRange) {
-        setState(() => _sleepTime = newRange);
-      },
-      style: const TimePickerStyle(
-        trackColor: Colors.white10,
-        rangeGradient: [Colors.indigoAccent, Colors.orange],
-        strokeWidth: 40,
-        handlerRadius: 20,
-        handlerColor: Colors.white,
-      ),
-      minuteInterval: 10,
-      snapStrategy: SnapStrategy.round,
-    ),
-    Text(
-      _formatDuration(_sleepTime), // e.g. "8h", "4h 30m"
-      style: const TextStyle(
-        color: Colors.white,
-        fontSize: 28,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-  ],
-);
-```
-
----
 
 ## FAQ
 
 **Q: How do I display the total duration in the center?**
+
 A: Wrap the `CircularTimeRangePicker` in a `Stack` and place a `Text` widget in the center. Since the picker's center is transparent, the text will be visible.
 
 **Q: Does it support 12-hour or 24-hour formats?**
+
 A: The picker always operates on a 24-hour logic (full circle), but you can format the output `TimeOfDay` to 12h or 24h format in your UI using `timeOfDay.format(context)`.
 
----
 
 ## Roadmap
 
@@ -232,7 +190,6 @@ A: The picker always operates on a 24-hour logic (full circle), but you can form
 - [ ] Vibrate feedback on snap.
 - [ ] Support for non-linear time scales.
 
----
 
 ## License
 
