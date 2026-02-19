@@ -1,7 +1,10 @@
 # circular_time_range_picker
-
 A highly customizable circular time **range** picker for Flutter. 
 Perfect for use cases like **sleep tracking, focus sessions, or scheduling**, where users select a start and end time on a 24-hour clock face.
+<p align="center">
+  <img src="https://raw.githubusercontent.com/CAY96/circular_time_range_picker/main/assets/demo_0.gif" width="30%" alt="Basic Demo" />
+  <img src="https://raw.githubusercontent.com/CAY96/circular_time_range_picker/main/assets/demo_1.gif" width="30%" alt="Basic Demo" />
+</p>
 
 ## Features
 
