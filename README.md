@@ -27,7 +27,7 @@ Add the package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  circular_time_range_picker: ^1.0.0
+  circular_time_range_picker: ^0.1.0
 ```
 
 Import it in your Dart code:
