@@ -26,6 +26,11 @@ class TimePickerPainter extends CustomPainter {
       ..strokeWidth = style.strokeWidth;
     canvas.drawCircle(center, radius, trackPaint);
 
+    // Draw ticks if enabled
+    if (style.tickStyle != null) {
+      _drawTicks(canvas, center, radius, style.tickStyle!);
+    }
+
     // Normalize to [0, 2π) so sweep is correct (atan2 returns [-π, π], which can make the arc disappear).
     final double twoPi = 2 * pi;
     double norm(double a) {
@@ -84,6 +89,28 @@ class TimePickerPainter extends CustomPainter {
     final Color a = colors[index];
     final Color b = colors[index + 1];
     return Color.lerp(a, b, localT)!;
+  }
+
+  void _drawTicks(Canvas canvas, Offset center, double radius, TickStyle tickStyle) {
+    final tickRadius = radius - tickStyle.tickOffsetFromCenter;
+    final tickPaint = Paint()
+      ..color = tickStyle.tickColor
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = tickStyle.tickWidth;
+
+    final angleStep = 2 * pi / tickStyle.tickCount;
+    for (int i = 0; i < tickStyle.tickCount; i++) {
+      final angle = i * angleStep;
+      final startOffset = Offset(
+        center.dx + (tickRadius - tickStyle.tickLength / 2) * cos(angle),
+        center.dy + (tickRadius - tickStyle.tickLength / 2) * sin(angle),
+      );
+      final endOffset = Offset(
+        center.dx + (tickRadius + tickStyle.tickLength / 2) * cos(angle),
+        center.dy + (tickRadius + tickStyle.tickLength / 2) * sin(angle),
+      );
+      canvas.drawLine(startOffset, endOffset, tickPaint);
+    }
   }
 
   void _drawHandle(Canvas canvas, Offset center, double radius, double angle) {

@@ -1,5 +1,21 @@
 import 'package:flutter/material.dart';
 
+class TickStyle {
+  final Color tickColor;
+  final int tickCount;
+  final double tickOffsetFromCenter;
+  final double tickLength;
+  final double tickWidth;
+
+  const TickStyle({
+    this.tickColor = Colors.white24,
+    this.tickCount = 24,
+    this.tickOffsetFromCenter = 10.0,
+    this.tickLength = 5.0,
+    this.tickWidth = 1.0,
+  });
+}
+
 class TimePickerStyle {
   final Color trackColor;
   final List<Color> rangeGradient;
@@ -8,6 +24,7 @@ class TimePickerStyle {
   final Color handlerColor;
   final Widget? startHandlerWidget;
   final Widget? endHandlerWidget;
+  final TickStyle? tickStyle;
 
   const TimePickerStyle({
     this.trackColor = Colors.white10,
@@ -17,5 +34,6 @@ class TimePickerStyle {
     this.handlerColor = Colors.white,
     this.startHandlerWidget,
     this.endHandlerWidget,
+    this.tickStyle,
   });
 }
