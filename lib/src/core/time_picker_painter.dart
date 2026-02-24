@@ -101,13 +101,31 @@ class TimePickerPainter extends CustomPainter {
     final angleStep = 2 * pi / tickStyle.tickCount;
     for (int i = 0; i < tickStyle.tickCount; i++) {
       final angle = i * angleStep;
+      final currentTickLength = (i % tickStyle.majorTickInterval == 0) ? tickStyle.majorTickLength : tickStyle.tickLength;
+
+      double innerRadius, outerRadius;
+      switch (tickStyle.tickAlignment) {
+        case TickAlignment.center:
+          innerRadius = tickRadius - currentTickLength / 2;
+          outerRadius = tickRadius + currentTickLength / 2;
+          break;
+        case TickAlignment.outer:
+          outerRadius = tickRadius;
+          innerRadius = tickRadius - currentTickLength;
+          break;
+        case TickAlignment.inner:
+          innerRadius = tickRadius;
+          outerRadius = tickRadius + currentTickLength;
+          break;
+      }
+
       final startOffset = Offset(
-        center.dx + (tickRadius - tickStyle.tickLength / 2) * cos(angle),
-        center.dy + (tickRadius - tickStyle.tickLength / 2) * sin(angle),
+        center.dx + innerRadius * cos(angle),
+        center.dy + innerRadius * sin(angle),
       );
       final endOffset = Offset(
-        center.dx + (tickRadius + tickStyle.tickLength / 2) * cos(angle),
-        center.dy + (tickRadius + tickStyle.tickLength / 2) * sin(angle),
+        center.dx + outerRadius * cos(angle),
+        center.dy + outerRadius * sin(angle),
       );
       canvas.drawLine(startOffset, endOffset, tickPaint);
     }
