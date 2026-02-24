@@ -137,15 +137,19 @@ class TimePickerPainter extends CustomPainter {
       center.dy + radius * sin(angle),
     );
     
+    // Draw shadow for elevation effect
+    final shadowOffset = Offset(0, 1);
+    final shadowPaint = Paint()
+      ..color = Colors.black12
+      ..maskFilter = MaskFilter.blur(BlurStyle.normal, 1.5);
+    canvas.drawCircle(handleOffset + shadowOffset, style.handlerRadius, shadowPaint);
+    
+    // Draw handle
     final paint = Paint()
       ..color = style.handlerColor
       ..style = PaintingStyle.fill;
     
     canvas.drawCircle(handleOffset, style.handlerRadius, paint);
-    canvas.drawCircle(handleOffset, style.handlerRadius, Paint()
-      ..color = Colors.black12
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2);
   }
 
   @override
