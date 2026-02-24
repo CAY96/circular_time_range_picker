@@ -89,9 +89,10 @@ CircularTimeRangePicker({
   int minuteInterval = 10,
   SnapStrategy snapStrategy = SnapStrategy.round,
 })
-```
-
+``` 
+- **`size`**: the size of the picker widget.
 - **`initialValue`**: initial start/end `TimeOfDay`.
+- **`style`**: the style for the picker UI, such as colors and handler appearance.
 - **`onChanged`**: called whenever the user drags a handle or arc.
 - **`minuteInterval`**:
   - “snap step” in minutes (e.g. `1`, `5`, `10`, `15`, `30`, `60`).
@@ -102,11 +103,7 @@ CircularTimeRangePicker({
   - `SnapStrategy.ceil` – always snap up
   - `SnapStrategy.none` – **no snapping** (in this case `minuteInterval` is ignored)
 
-Internally, both:
-- the **displayed times** and
-- the **handle positions (angles)**
-
-are snapped according to these settings, so the UI and values stay perfectly in sync.
+Internally, both the **displayed times** and the **handle positions (angles)** are snapped according to these settings, so the UI and values stay in sync.
 
 
 ### `TimeRangeValue`
@@ -155,10 +152,11 @@ class TimePickerStyle {
 - **`trackColor`**: background ring color.
 - **`rangeGradient`**: gradient along the active arc (start → end).
 - **`strokeWidth`**: thickness of the ring.
-- **`handlerRadius` / `handlerColor`**:
-- base circular handlers drawn by the painter.
-- **`startHandlerWidget` / `endHandlerWidget`**:
-- Optional custom widgets rendered **on top of** the handles, positioned so that their centers sit exactly on the ring.
+- **`handlerRadius` / `handlerColor`**: base circular handlers drawn by the painter.
+- **`startHandlerWidget` / `endHandlerWidget`**: Optional custom widgets (e.g., Icon, Image) rendered **on top of** the handles.
+  
+  💡 Tip: To use a **fully custom handler**, 
+  set `handlerRadius` to `0` and provide your own widget to `startHandlerWidget` or `endHandlerWidget`.
 
 Example:
 
@@ -188,3 +186,10 @@ A: The picker always operates on a 24-hour logic (full circle), but you can form
 ## License
 
 This package is distributed under the MIT License. See `LICENSE` for details.
+
+## Contributing and Feedback
+
+Feedback is always welcome! If you encounter any bugs or have feature requests, please open an **[issue](https://github.com/CAY96/circular_time_range_picker/issues)**. Pull requests are also highly appreciated!
+
+
+
