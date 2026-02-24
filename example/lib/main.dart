@@ -49,7 +49,7 @@ class _SleepTrackerExampleState extends State<SleepTrackerExample> {
               },
               minuteInterval: 10,
               snapStrategy: SnapStrategy.round,
-              style:  TimePickerStyle(
+              style: TimePickerStyle(
                 trackColor: Colors.white10,
                 rangeGradient: [Colors.indigoAccent, Colors.deepOrangeAccent],
                 strokeWidth: 40,
@@ -58,7 +58,7 @@ class _SleepTrackerExampleState extends State<SleepTrackerExample> {
                 startHandlerWidget: Icon(Icons.mode_night_rounded, color: Colors.indigo, size: 30),
                 endHandlerWidget: Icon(Icons.sunny, color: Colors.orange, size: 30),
                 tickStyle: const TickStyle(
-                  tickColor: Colors.white30,
+                  tickColor: Colors.white24,
                   tickCount: 24,
                   tickOffsetFromCenter: 32.0,
                   tickLength: 5.0,
