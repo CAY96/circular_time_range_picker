@@ -15,9 +15,9 @@ class TickStyle {
   const TickStyle({
     this.tickColor = Colors.white24,
     this.tickCount = 24,
-    this.tickOffsetFromCenter = 10.0,
+    this.tickOffsetFromCenter = 0.0,
     this.tickLength = 5.0,
-    this.tickWidth = 1.0,
+    this.tickWidth = 2.0,
     this.majorTickLength = 10.0,
     this.majorTickInterval = 6,
     this.tickAlignment = TickAlignment.center,
@@ -37,8 +37,8 @@ class TimePickerStyle {
   const TimePickerStyle({
     this.trackColor = Colors.white10,
     this.rangeGradient = const [Colors.indigoAccent, Colors.deepOrangeAccent],
-    this.strokeWidth = 30.0,
-    this.handlerRadius = 18.0,
+    this.strokeWidth = 40.0,
+    this.handlerRadius = 25.0,
     this.handlerColor = Colors.white,
     this.startHandlerWidget,
     this.endHandlerWidget,
