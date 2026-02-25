@@ -3,24 +3,35 @@ import 'package:flutter/material.dart';
 enum TickAlignment { center, outer, inner }
 
 class TickStyle {
-  final Color tickColor;
+  // Common settings
   final int tickCount;
   final double tickOffsetFromCenter;
-  final double tickLength;
-  final double tickWidth;
-  final double majorTickLength;
-  final int majorTickInterval;
   final TickAlignment tickAlignment;
 
+  // Regular tick settings
+  final Color tickColor;
+  final double tickLength;
+  final double tickWidth;
+
+  // Major tick settings
+  final bool enableMajorTicks;
+  final int majorTickInterval;
+  final Color? majorTickColor;
+  final double majorTickLength;
+  final double majorTickWidth;
+
   const TickStyle({
-    this.tickColor = Colors.white24,
     this.tickCount = 24,
     this.tickOffsetFromCenter = 0.0,
+    this.tickAlignment = TickAlignment.center,
+    this.tickColor = Colors.white24,
     this.tickLength = 5.0,
     this.tickWidth = 2.0,
-    this.majorTickLength = 10.0,
+    this.enableMajorTicks = true,
     this.majorTickInterval = 6,
-    this.tickAlignment = TickAlignment.center,
+    this.majorTickColor = Colors.white60,
+    this.majorTickLength = 12.0,
+    this.majorTickWidth = 2.5,
   });
 }
 

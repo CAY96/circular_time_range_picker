@@ -101,7 +101,17 @@ class TimePickerPainter extends CustomPainter {
     final angleStep = 2 * pi / tickStyle.tickCount;
     for (int i = 0; i < tickStyle.tickCount; i++) {
       final angle = i * angleStep;
-      final currentTickLength = (i % tickStyle.majorTickInterval == 0) ? tickStyle.majorTickLength : tickStyle.tickLength;
+      final isMajorTick = tickStyle.enableMajorTicks && (i % tickStyle.majorTickInterval == 0);
+      final currentTickLength = isMajorTick ? tickStyle.majorTickLength : tickStyle.tickLength;
+      
+      // Use majorTickColor and majorTickWidth for major ticks if provided
+      if (isMajorTick && tickStyle.majorTickColor != null) {
+        tickPaint.color = tickStyle.majorTickColor!;
+        tickPaint.strokeWidth = tickStyle.majorTickWidth;
+      } else {
+        tickPaint.color = tickStyle.tickColor;
+        tickPaint.strokeWidth = tickStyle.tickWidth;
+      }
 
       double innerRadius, outerRadius;
       switch (tickStyle.tickAlignment) {
