@@ -46,7 +46,7 @@ class CircularTimeRangePicker extends StatefulWidget {
 
   const CircularTimeRangePicker({
     super.key,
-    this.size = const Size(250, 250),
+    this.size = const Size(280, 280),
     required this.initialValue,
     this.style = const TimePickerStyle(),
     required this.onChanged,

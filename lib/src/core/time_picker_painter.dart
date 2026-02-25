@@ -26,6 +26,11 @@ class TimePickerPainter extends CustomPainter {
       ..strokeWidth = style.strokeWidth;
     canvas.drawCircle(center, radius, trackPaint);
 
+    // Draw ticks if enabled
+    if (style.tickStyle != null) {
+      _drawTicks(canvas, center, radius, style.tickStyle!);
+    }
+
     // Normalize to [0, 2π) so sweep is correct (atan2 returns [-π, π], which can make the arc disappear).
     final double twoPi = 2 * pi;
     double norm(double a) {
@@ -86,21 +91,75 @@ class TimePickerPainter extends CustomPainter {
     return Color.lerp(a, b, localT)!;
   }
 
+  void _drawTicks(Canvas canvas, Offset center, double radius, TickStyle tickStyle) {
+    final tickRadius = radius - tickStyle.tickOffsetFromCenter;
+    final tickPaint = Paint()
+      ..color = tickStyle.tickColor
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = tickStyle.tickWidth;
+
+    final angleStep = 2 * pi / tickStyle.tickCount;
+    for (int i = 0; i < tickStyle.tickCount; i++) {
+      final angle = i * angleStep;
+      final isMajorTick = tickStyle.enableMajorTicks && (i % tickStyle.majorTickInterval == 0);
+      final currentTickLength = isMajorTick ? tickStyle.majorTickLength : tickStyle.tickLength;
+      
+      // Use majorTickColor and majorTickWidth for major ticks if provided
+      if (isMajorTick && tickStyle.majorTickColor != null) {
+        tickPaint.color = tickStyle.majorTickColor!;
+        tickPaint.strokeWidth = tickStyle.majorTickWidth;
+      } else {
+        tickPaint.color = tickStyle.tickColor;
+        tickPaint.strokeWidth = tickStyle.tickWidth;
+      }
+
+      double innerRadius, outerRadius;
+      switch (tickStyle.tickAlignment) {
+        case TickAlignment.center:
+          innerRadius = tickRadius - currentTickLength / 2;
+          outerRadius = tickRadius + currentTickLength / 2;
+          break;
+        case TickAlignment.outer:
+          outerRadius = tickRadius;
+          innerRadius = tickRadius - currentTickLength;
+          break;
+        case TickAlignment.inner:
+          innerRadius = tickRadius;
+          outerRadius = tickRadius + currentTickLength;
+          break;
+      }
+
+      final startOffset = Offset(
+        center.dx + innerRadius * cos(angle),
+        center.dy + innerRadius * sin(angle),
+      );
+      final endOffset = Offset(
+        center.dx + outerRadius * cos(angle),
+        center.dy + outerRadius * sin(angle),
+      );
+      canvas.drawLine(startOffset, endOffset, tickPaint);
+    }
+  }
+
   void _drawHandle(Canvas canvas, Offset center, double radius, double angle) {
     final handleOffset = Offset(
       center.dx + radius * cos(angle),
       center.dy + radius * sin(angle),
     );
     
+    // Draw shadow for elevation effect
+    final shadowOffset = Offset(0, 1);
+    final shadowPaint = Paint()
+      ..color = Colors.black12
+      ..maskFilter = MaskFilter.blur(BlurStyle.normal, 1.5);
+    canvas.drawCircle(handleOffset + shadowOffset, style.handlerRadius, shadowPaint);
+    
+    // Draw handle
     final paint = Paint()
       ..color = style.handlerColor
       ..style = PaintingStyle.fill;
     
     canvas.drawCircle(handleOffset, style.handlerRadius, paint);
-    canvas.drawCircle(handleOffset, style.handlerRadius, Paint()
-      ..color = Colors.black12
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2);
   }
 
   @override
