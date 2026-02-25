@@ -1,6 +1,6 @@
 name: circular_time_range_picker
 description: "A customizable circular time range picker widget for Flutter applications."
-version: 0.1.1
+version: 0.2.0
 homepage: https://github.com/CAY96/circular_time_range_picker.git
 
 environment:

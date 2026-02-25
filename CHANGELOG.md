@@ -1,3 +1,11 @@
+## 0.2.0
+
+* Add tick marks feature for visual time reference
+* New `TickStyle` class with customizable tick appearance
+* New `TickAlignment` enum for tick positioning
+* Add `tickStyle` property to `TimePickerStyle`
+* Support for major and minor tick marks with different colors and sizes
+
 ## 0.1.1
 
 * Fix minor typos in README.
